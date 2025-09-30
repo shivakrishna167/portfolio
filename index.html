@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasupuleti Shiva Krishna | Frontend Developer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-color: #3B82F6; 
+            --primary-hover-color: #2563EB;
+            --background-color: #F9FAFB; 
+            --text-color: #374151; 
+            --heading-color: #111827; 
+            --card-background: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #E5E7EB;
+        }
+
+        /* General Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: var(--card-background);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 80vh;
+            padding: 4rem 0;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--heading-color);
+            margin: 0;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin: 1rem 0 2.5rem 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .hero-buttons .btn {
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* General Section Styles */
+        section {
+            padding: 60px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--heading-color);
+            margin-bottom: 50px;
+        }
+
+        /* About Me Section */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            flex-shrink: 0;
+        }
+
+        .about-image img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%; 
+            box-shadow: 0 8px 30px var(--shadow-color);
+            border: 5px solid var(--card-background);
+        }
+        
+        .about-text h3 {
+            color: var(--heading-color);
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        .about-text h4 {
+            color: var(--heading-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .about-text ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-text ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .about-text ul li::before {
+            content: '✔';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* === GENERIC DROPDOWN STYLES (FOR SKILLS AND PROJECTS) === */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-container .btn .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-container .btn.open .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-background);
+            min-width: 260px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            border-radius: 10px;
+            z-index: 1;
+            margin-top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 15px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .dropdown-content a i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f5ff;
+            color: var(--primary-color);
+        }
+
+        .show {
+            display: block;
+        }
+
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .project-image-placeholder {
+            background-image: linear-gradient(45deg, #E5E7EB, #F9FAFB);
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #9CA3AF;
+        }
+        
+        .project-image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--heading-color);
+        }
+        
+        .project-info p {
+            flex-grow: 1;
+        }
+        
+        .project-links {
+            margin-top: 20px;
+        }
+        
+        .project-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-right: 15px;
+            transition: text-decoration 0.3s;
+        }
+        
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .project-links i {
+            margin-right: 5px;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--heading-color);
+            color: #E5E7EB;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .social-links a {
+            color: #E5E7EB;
+            font-size: 1.5rem;
+            margin: 0 12px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text ul li {
+                text-align: left;
+                padding-left: 28px;
+            }
+            .about-image img {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="nav-logo">Shiva Krishna.</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1>Hello, I'm <span>Shiva Krishna</span>.</h1>
+                <p>An aspiring Front-End Developer passionate about building beautiful and functional web applications.</p>
+                <!-- === MODIFIED HERO BUTTONS WITH DROPDOWNS === -->
+                <div class="hero-buttons">
+                    <div class="dropdown-container">
+                        <button id="projectsBtn" class="btn btn-primary">
+                            <i class="fas fa-briefcase"></i> My Projects <i class="fas fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <div id="projectsDropdownContent" class="dropdown-content">
+                            <a href="#project-portfolio"><i class="fas fa-portrait"></i> Personal Portfolio</a>
+                            <a href="#project-todo"><i class="fas fa-list-check"></i> To-Do List App</a>
+                            <a href="#project-weather"><i class="fas fa-cloud-sun"></i> Weather App</a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-container">
+                        <button id="skillsBtn" class="btn btn-secondary">
+                            My Skills <i class="fas fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <div id="skillsDropdownContent" class="dropdown-content">
+                            <a><i class="fa-brands fa-html5"></i> HTML5</a>
+                            <a><i class="fa-brands fa-css3-alt"></i> CSS3</a>
+                            <a><i class="fa-brands fa-js"></i> JavaScript</a>
+                            <a><i class="fas fa-mobile-alt"></i> Responsive Design</a>
+                            <a><i class="fa-brands fa-git-alt"></i> Git</a>
+                            <a><i class="fa-brands fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-secondary" target="_blank"><i class="fas fa-download"></i> Download Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-container">
+                    <div class="about-image">
+                        <img src="https://i.imgur.com/gK9qQ4D.jpg" alt="Pasupuleti Shiva Krishna">
+                    </div>
+                    <div class="about-text">
+                        <h3>Passionate Developer & Lifelong Learner</h3>
+                        <p>
+                            I am a highly motivated and detail-oriented individual with a strong foundation in HTML, CSS, and JavaScript. My passion lies in crafting clean, user-friendly, and responsive websites that solve real-world challenges.
+                        </p>
+                        
+                        <h4>Key Highlights:</h4>
+                        <ul>
+                            <li><strong>Exceptional Academic Record:</strong> Demonstrated commitment to excellence with a perfect <strong>10/10 GPA</strong> in high school and a score of <strong>963/1000</strong> in intermediate studies.</li>
+                            <li><strong>Hands-On Project Experience:</strong> Developed practical applications, including an interactive to-do list and a weather app using third-party APIs, showcasing my technical abilities.</li>
+                            <li><strong>User-Centric Focus:</strong> Strong belief in creating intuitive and engaging user experiences through thoughtful design and clean code.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title">A Closer Look at My Skills</h2>
+                <p style="max-width: 600px; margin: -20px auto 40px auto;">You can see a summary of my core skills in the dropdown menu in the header section, or explore my projects below to see them in action.</p>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid">
+                    <!-- Added ID for anchor linking -->
+                    <div id="project-portfolio" class="project-card">
+                        <div class="project-image-placeholder">
+                            <i class="fas fa-portrait"></i>
+                            <span>Portfolio Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Personal Portfolio Website</h3>
+                            <p>A responsive personal portfolio (this website!) built from scratch to showcase my skills in HTML, CSS, and JavaScript.</p>
+                            <div class="project-links">
+                                <a href="https://shivakrishna167.github.io/portfolio/" target="_blank"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+                                <a href="https://github.com/Shivakrishna167/portfolio" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Added ID for anchor linking -->
+                    <div id="project-todo" class="project-card">
+                        <div class="project-image-placeholder">
+                             <i class="fas fa-list-check"></i>
+                             <span>To-Do App Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Interactive To-Do List App</h3>
+                            <p>A web application that allows users to add, delete, and mark tasks as complete, demonstrating key JavaScript DOM manipulation concepts.</p>
+                            <div class="project-links">
+                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+                                <a href="https://github.com/Shivakrishna167" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Added ID for anchor linking -->
+                    <div id="project-weather" class="project-card">
+                         <div class="project-image-placeholder">
+                             <i class="fas fa-cloud-sun"></i>
+                             <span>Weather App Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Simple Weather App</h3>
+                            <p>A clean weather dashboard that fetches real-time data from a third-party API based on user input, showcasing asynchronous JavaScript (Fetch API).</p>
+                            <div class="project-links">
+                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+                                <a href="https://github.com/Shivakrishna167" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                 <p style="text-align: center; max-width: 600px; margin: 0 auto;">
+                    <strong>Intermediate | Sri Chaitanya College, Khammam</strong><br>
+                    Result: 963 / 1000<br><br>
+                    <strong>High School | MJPBCWREIS Boys, Bonakal</strong><br>
+                    10th Result: 10/10 GPA
+                 </p>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>I'm currently seeking new opportunities and would love to hear from you. Whether you have a question or just want to connect, feel free to reach out!</p>
+                <a href="mailto:shivakrishnanaidupasupuleti@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Say Hello</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/Shivakrishna167" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shivakrishna-naidu-pasupuleti-509a82333" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; 2025 Pasupuleti Shiva Krishna. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- FADE-IN EFFECT ON SCROLL ---
+        const sections = document.querySelectorAll('.content-section, .hero');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- NEW DROPDOWN LOGIC FOR BOTH BUTTONS ---
+        const projectsButton = document.getElementById("projectsBtn");
+        const projectsDropdown = document.getElementById("projectsDropdownContent");
+        
+        const skillsButton = document.getElementById("skillsBtn");
+        const skillsDropdown = document.getElementById("skillsDropdownContent");
+
+        // Function to close all dropdowns
+        const closeAllDropdowns = () => {
+            projectsDropdown.classList.remove('show');
+            projectsButton.classList.remove('open');
+            skillsDropdown.classList.remove('show');
+            skillsButton.classList.remove('open');
+        }
+
+        projectsButton.addEventListener('click', function(event) {
+            const isAlreadyOpen = projectsDropdown.classList.contains('show');
+            closeAllDropdowns();
+            if (!isAlreadyOpen) {
+                projectsDropdown.classList.add('show');
+                projectsButton.classList.add('open');
+            }
+            event.stopPropagation();
+        });
+        
+        skillsButton.addEventListener('click', function(event) {
+            const isAlreadyOpen = skillsDropdown.classList.contains('show');
+            closeAllDropdowns();
+            if (!isAlreadyOpen) {
+                skillsDropdown.classList.add('show');
+                skillsButton.classList.add('open');
+            }
+            event.stopPropagation();
+        });
+
+        // Close dropdowns if the user clicks outside
+        window.addEventListener('click', function(event) {
+            if (!projectsButton.contains(event.target) && !skillsButton.contains(event.target)) {
+                closeAllDropdowns();
+            }
+        });
+
+    </script>
+</body>
+</html>```
+  
